@@ -1,0 +1,53 @@
+@startuml
+
+hide circle
+class Cliente{
+
+}
+class Empresa{
+    ruc: String
+    nombre: String
+}
+class Factura{
+    iva: double
+    descuento: double
+    total: double
+}
+
+class Item implements comparable{
+    cantidad: int
+    total: double
+}
+abstract class ProductoServicio
+class Producto
+class Servicio
+class ProductoServicio
+class Descuento
+class DescuentoCero
+class DescuentoPorcentualAlTotal
+class Descuento50Porciento
+class Descuento100AlProductoMasCaro
+
+Empresa -->"*" ProductoServicio: productos
+Empresa -->"*" Cliente: clientes
+Empresa -->"*" Factura: facturas
+
+Factura --> "*" Item: detalleFactura
+Factura --> Cliente:cliente
+Factura ...> Descuento
+
+ProductoServicio <|-- Producto
+ProductoServicio <|-- Servicio
+
+Cliente -->"*" Item: carritoDeCompras
+
+Item -> ProductoServicio: productoServicio
+
+Descuento  <|-- DescuentoCero
+DescuentoPorcentualAlTotal  <|-- Descuento50Porciento
+Descuento  <|-- DescuentoPorcentualAlTotal
+Descuento  <|-- Descuento100AlProductoMasCaro
+
+
+
+@enduml
